@@ -2,27 +2,43 @@ import telebot
 from config import keys, TOKEN
 from extensions import APIException, ValuteConverter
 
+
 bot = telebot.TeleBot(TOKEN)  # Создание бота
 
-'''Ответ бота на команды /start и /help'''
+
 @bot.message_handler(commands=['start', 'help'])
 def start_help(message):
+    """
+    Ответ бота на команды /start и /help
+    :param message:
+    :return:
+    """
     text = ('Чтобы начать работу с ботом введите:\n'
             '<название валюты> <в какую валюту перевести> <количество валюты>\n'
             'Чтобы увидеть список доступных валют введите: /values')
     bot.reply_to(message, text)
 
-'''Ответ бота на команду /values'''
+
 @bot.message_handler(commands=['values'])
 def values(message: telebot.types.Message):
+    """
+    Ответ бота на команду /values
+    :param message:
+    :return:
+    """
     text = 'Список доступных валют: '
     for key in keys.keys():
         text = '\n'.join((text, key))
     bot.reply_to(message, text)
 
-'''Ответ бота на ввод текста'''
+
 @bot.message_handler(content_types=['text'])
 def convert(message: telebot.types.Message):
+    """
+    Ответ бота на ввод текста
+    :param message:
+    :return:
+    """
     try:
         values = message.text.lower().split(' ')  # Разбиваем введённый пользователем текст по пробелам
 

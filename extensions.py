@@ -3,12 +3,17 @@ import requests
 from config import keys
 
 
-'''Моё исключение'''
 class APIException(Exception):
+    """
+    Моё исключение
+    """
     pass
 
-'''Конвертация валюты'''
+
 class ValuteConverter:
+    """
+    Конвертация валюты
+    """
     @staticmethod
     def get_price(quote: str, base: str, amount: str):
         if quote == base:
